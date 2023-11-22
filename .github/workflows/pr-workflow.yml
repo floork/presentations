@@ -1,0 +1,15 @@
+name: Pull Request Workflow
+on:
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+  rust-workflow:
+    uses: ./.github/workflows/cargo.yml
+  prettier-workflow:
+    needs: rust-workflow
+    uses: ./.github/workflows/prettier.yml
